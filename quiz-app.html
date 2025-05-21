@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aadish Quiz App</title>
+  <link rel="stylesheet" href="quiz-app.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+</head>
+<body>
+  <!-- Menu Button -->
+  <button id="menu-toggle" class="menu-toggle hide-during-splash" aria-label="Open menu">☰</button>
+
+  <!-- Sidebar Menu -->
+  <aside id="sidebar-menu" class="sidebar-menu hide-during-splash">
+    <div class="sidebar-header">
+      <div class="sidebar-profile-pic" id="sidebar-profile-pic"></div>
+      <div class="sidebar-profile-info">
+        <div id="sidebar-username"></div>
+        <div id="sidebar-email"></div>
+      </div>
+    </div>
+    <ul class="sidebar-list">
+      <li><button id="sidebar-home">Home</button></li>
+      <li><button id="sidebar-edit-profile">Edit Profile</button></li>
+      <li><button id="sidebar-change-password">Change Password</button></li>
+      <li><button id="sidebar-change-email">Change Email</button></li>
+      <li><button id="sidebar-progress-report">Progress Report</button></li>
+    </ul>
+    <button id="sidebar-logout" class="sidebar-logout">Log Out</button>
+  </aside>
+  <div id="sidebar-overlay" class="sidebar-overlay hide-during-splash"></div>
+  <button id="dark-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+  <button id="lang-toggle" title="Change language" aria-label="Change language" style="position:fixed;top:18px;right:130px;z-index:1200;background:#fff;color:#2563eb;border:none;border-radius:50%;width:44px;height:44px;box-shadow:0 2px 12px #b2cfff44;font-size:1.2em;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s,color 0.2s;">🇮🇳 हिंदी</button>
+  <!-- Banner Ad Start -->
+  <div class="banner-ad" role="region" aria-label="Advertisement">
+    <!-- Banner Ad Placeholder -->
+    <span>🚀 Your Ad Here! Boost your brand with Quiz App! 🚀</span>
+  </div>
+  <!-- Banner Ad End -->
+  <div id="splash-screen" class="splash-screen" aria-label="Loading...">
+    <div class="splash-content">
+      <div class="splash-logo">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="28" stroke="#2563eb" stroke-width="6" fill="#e0eafc"/>
+          <circle class="splash-spinner" cx="32" cy="32" r="20" stroke="#b2cfff" stroke-width="6" fill="none"/>
+        </svg>
+      </div>
+      <div class="splash-title">Quiz App</div>
+    </div>
+  </div>
+  <div class="animated-bg">
+    <div class="glass-bg"></div>
+  </div>
+  <div id="app">
+    <!-- Home Screen -->
+    <section id="home-screen" class="active screen">
+      <div class="profile" id="profile-edit-trigger" tabindex="0" aria-label="Edit profile">
+        <img id="user-avatar" src="https://i.pravatar.cc/100" alt="Avatar">
+        <div>
+          <h2 id="user-name">Player 1</h2>
+          <p>Score: <span id="user-score">0</span></p>
+        </div>
+      </div>
+      <!-- Add Manage Questions Button for Admin -->
+      <button id="manage-questions-btn" class="admin-btn" style="display: none;">Manage Questions</button>
+      <h1>Choose a Category</h1>
+      <div class="categories">
+        <div class="category-card" data-category="science">
+          <span class="icon">🔬</span>
+          <span>Science</span>
+          <div class="sub-categories">
+            <button class="sub-category-btn" data-category="science" data-sub="class9">Class 9th</button>
+            <button class="sub-category-btn" data-category="science" data-sub="class10">Class 10th</button>
+          </div>
+        </div>
+        <div class="category-card" data-category="history">
+          <span class="icon">📜</span>
+          <span>History</span>
+          <div class="sub-categories">
+            <button class="sub-category-btn" data-category="history" data-sub="class9">Class 9th</button>
+            <button class="sub-category-btn" data-category="history" data-sub="class10">Class 10th</button>
+          </div>
+        </div>
+        <div class="category-card" data-category="math">
+          <span class="icon">➗</span>
+          <span>Math</span>
+          <div class="sub-categories">
+            <button class="sub-category-btn" data-category="math" data-sub="class9">Class 9th</button>
+            <button class="sub-category-btn" data-category="math" data-sub="class10">Class 10th</button>
+          </div>
+        </div>
+        <div class="category-card" data-category="general">
+          <span class="icon">🌍</span>
+          <span>General</span>
+          <div class="sub-categories">
+            <button class="sub-category-btn" data-category="general" data-sub="class9">Class 9th</button>
+            <button class="sub-category-btn" data-category="general" data-sub="class10">Class 10th</button>
+          </div>
+        </div>
+        <div class="category-card" data-category="sanskrit">
+          <span class="icon">🕉️</span>
+          <span>Sanskrit</span>
+          <div class="sub-categories">
+            <button class="sub-category-btn" data-category="sanskrit" data-sub="class9">Class 9th</button>
+            <button class="sub-category-btn" data-category="sanskrit" data-sub="class10">Class 10th</button>
+          </div>
+        </div>
+        <div class="category-card" data-category="hindi">
+          <span class="icon">📝</span>
+          <span>Hindi</span>
+          <div class="sub-categories">
+            <button class="sub-category-btn" data-category="hindi" data-sub="class9">Class 9th</button>
+            <button class="sub-category-btn" data-category="hindi" data-sub="class10">Class 10th</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Quiz Screen -->
+    <section id="quiz-screen" class="screen" aria-label="Quiz Screen">
+      <div class="quiz-progress-bar" aria-hidden="true">
+        <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+      </div>
+      <div class="quiz-header">
+        <span id="question-counter" aria-live="polite">Question 1 of 10</span>
+        <div class="lifelines">
+          <button id="lifeline-5050" title="50-50" aria-label="50-50: Remove two wrong options">50-50</button>
+          <span class="lifeline-tooltip">Removes two wrong options</span>
+          <button id="lifeline-skip" title="Skip" aria-label="Skip: Skip this question">⏭️</button>
+          <span class="lifeline-tooltip">Skips this question</span>
+          <button id="lifeline-pause" title="Pause Timer" aria-label="Pause Timer: Pause countdown for 10 seconds">⏸️</button>
+          <span class="lifeline-tooltip">Pauses timer for 10 seconds</span>
+          <button id="lifeline-poll" title="Audience Poll" aria-label="Audience Poll: Show audience poll">👀</button>
+          <span class="lifeline-tooltip">Shows audience poll</span>
+        </div>
+        <div class="timer" aria-label="Time left">
+          <svg id="timer-ring" width="48" height="48" viewBox="0 0 48 48">
+            <circle class="timer-bg" cx="24" cy="24" r="20" stroke-width="6" fill="none"/>
+            <circle class="timer-fg" cx="24" cy="24" r="20" stroke-width="6" fill="none"/>
+          </svg>
+          <span id="timer-value" class="timer-value">15</span>
+        </div>
+        <div class="mini-score" aria-label="Current score">
+          <span id="mini-score">0</span>
+        </div>
+      </div>
+      <div class="question-area" aria-live="polite">
+        <div id="question-media" class="question-media" aria-hidden="true"></div>
+        <h2 id="quiz-question-text">Question text here</h2>
+        <div class="options" role="group" aria-label="Answer options">
+          <button class="option-btn" data-index="0"></button>
+          <button class="option-btn" data-index="1"></button>
+          <button class="option-btn" data-index="2"></button>
+          <button class="option-btn" data-index="3"></button>
+        </div>
+        <div id="answer-feedback" class="answer-feedback" aria-live="polite"></div>
+        <div id="audience-poll" class="audience-poll" style="display:none;" aria-label="Audience Poll Results"></div>
+      </div>
+      <button id="next-btn" class="next-btn">Next</button>
+    </section>
+    <!-- Result Screen -->
+    <section id="result-screen" class="screen">
+      <h1>Quiz Results</h1>
+      <div class="result-summary">
+        <div class="progress-circle">
+          <svg width="120" height="120">
+            <circle class="bg" cx="60" cy="60" r="54" stroke-width="12" fill="none"/>
+            <circle class="progress" cx="60" cy="60" r="54" stroke-width="12" fill="none"/>
+          </svg>
+          <span id="result-score">0/10</span>
+        </div>
+        <div class="result-details">
+          <p>Correct: <span id="correct-count">0</span></p>
+          <p>Wrong: <span id="wrong-count">0</span></p>
+          <p>Total Time: <span id="total-time">0</span>s</p>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button id="retry-btn">Retry Quiz</button>
+        <button id="home-btn">Return Home</button>
+      </div>
+    </section>
+  </div>
+  <footer class="app-footer">Made By Ayush</footer>
+  <!-- Profile Edit Modal -->
+  <div id="profile-modal" class="modal" aria-modal="true" role="dialog" style="display:none;">
+    <div class="modal-content">
+      <h2>Edit Profile</h2>
+      <form id="profile-form">
+        <div id="avatar-section" style="display:flex;flex-direction:column;align-items:center;margin-bottom:16px;gap:10px;">
+          <img id="avatar-preview" src="https://i.pravatar.cc/100" alt="Avatar Preview" style="width:72px;height:72px;border-radius:50%;border:3px solid #b2cfff;object-fit:cover;background:#e0eafc;box-shadow:0 2px 8px #b2cfff44;">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+            <img class="preset-avatar" src="https://i.pravatar.cc/100?u=1" alt="Preset 1" style="width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid #e0eafc;">
+            <img class="preset-avatar" src="https://i.pravatar.cc/100?u=2" alt="Preset 2" style="width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid #e0eafc;">
+            <img class="preset-avatar" src="https://i.pravatar.cc/100?u=3" alt="Preset 3" style="width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid #e0eafc;">
+            <img class="preset-avatar" src="https://i.pravatar.cc/100?u=4" alt="Preset 4" style="width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid #e0eafc;">
+          </div>
+        </div>
+        <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname" name="nickname" maxlength="16" required autocomplete="off">
+        <label for="user-class">Choose Class:</label>
+        <select id="user-class" name="user-class">
+          <option value="Warrior">Warrior 🗡️</option>
+          <option value="Mage">Mage 🪄</option>
+          <option value="Scientist">Scientist 🔬</option>
+          <option value="Historian">Historian 📜</option>
+          <option value="Mathematician">Mathematician ➗</option>
+          <option value="Explorer">Explorer 🌍</option>
+        </select>
+        <div class="modal-actions">
+          <button type="submit" id="save-profile">Save</button>
+          <button type="button" id="cancel-profile">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Login/Sign Up Page -->
+  <section id="login-page" class="login-page">
+    <div class="login-container">
+      <div class="login-tabs">
+        <button id="show-login" class="login-tab active">Login</button>
+        <button id="show-signup" class="login-tab">Sign Up</button>
+      </div>
+      <form id="login-form" class="login-form">
+        <input type="text" id="login-username" placeholder="Username" required autocomplete="username" />
+        <input type="password" id="login-password" placeholder="Password" required autocomplete="current-password" />
+        <button type="submit">Login</button>
+        <div id="login-error" class="login-error"></div>
+      </form>
+      <form id="signup-form" class="login-form" style="display:none;">
+        <input type="text" id="signup-username" placeholder="Username" required autocomplete="username" />
+        <input type="password" id="signup-password" placeholder="Password" required autocomplete="new-password" />
+        <input type="text" id="signup-name" placeholder="Full Name" required />
+        <input type="email" id="signup-email" placeholder="Email" required autocomplete="email" />
+        <input type="tel" id="signup-mobile" placeholder="Mobile Number" required pattern="[0-9]{10,15}" />
+        <button type="submit">Sign Up</button>
+        <div id="signup-error" class="login-error"></div>
+        <div id="signup-success" class="login-success"></div>
+      </form>
+    </div>
+  </section>
+  <!-- Generic Modal for Change Password, Change Email, Progress Report -->
+  <div id="custom-modal" class="custom-modal" style="display:none;">
+    <div class="custom-modal-content">
+      <button id="custom-modal-close" class="custom-modal-close" aria-label="Close">&times;</button>
+      <div id="custom-modal-body"></div>
+    </div>
+  </div>
+  <!-- Add Question Management Modal -->
+  <div id="question-modal" class="modal" aria-modal="true" role="dialog" style="display:none;">
+    <div class="modal-content">
+      <h2>Manage Questions</h2>
+      <div class="question-controls">
+        <select id="question-category">
+          <option value="science">Science</option>
+          <option value="history">History</option>
+          <option value="math">Math</option>
+          <option value="general">General</option>
+          <option value="sanskrit">Sanskrit</option>
+          <option value="hindi">Hindi</option>
+        </select>
+        <select id="question-sub">
+          <option value="class9">Class 9th</option>
+          <option value="class10">Class 10th</option>
+        </select>
+        <button id="add-question-btn">Add New Question</button>
+      </div>
+      <div id="questions-list" class="questions-list">
+        <!-- Questions will be listed here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Question Form Modal -->
+  <div id="question-form-modal" class="modal">
+    <div class="modal-content">
+      <h2 id="question-form-title">Add New Question</h2>
+      <form id="question-form">
+        <div class="form-group">
+          <label for="question-text">Question Text:</label>
+          <textarea id="question-text" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>Options:</label>
+          <div class="options-container">
+            <input type="text" class="option-input" placeholder="Option 1" required>
+            <input type="text" class="option-input" placeholder="Option 2" required>
+            <input type="text" class="option-input" placeholder="Option 3" required>
+            <input type="text" class="option-input" placeholder="Option 4" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="correct-answer">Correct Answer:</label>
+          <select id="correct-answer" required>
+            <option value="">Select correct answer</option>
+            <option value="0">Option 1</option>
+            <option value="1">Option 2</option>
+            <option value="2">Option 3</option>
+            <option value="3">Option 4</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="question-explanation">Explanation (optional):</label>
+          <textarea id="question-explanation"></textarea>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" onclick="closeQuestionForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="quiz-app.js"></script>
+</body>
+</html>
