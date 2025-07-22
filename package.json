@@ -1,0 +1,16 @@
+{
+  "name": "aadish-quiz-app",
+  "version": "1.0.0",
+  "description": "Interactive quiz application with multiple categories",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Build complete - static files ready'",
+    "start": "echo 'Open index.html in your browser'",
+    "dev": "echo 'Open index.html in your browser'"
+  },
+  "keywords": ["quiz", "education", "javascript", "html", "css"],
+  "author": "Ayush",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
