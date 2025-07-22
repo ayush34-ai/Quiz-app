@@ -56,8 +56,8 @@ body.dark {
   display: block;
 }
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateZ(0) translateY(30px) scale(0.98); }
+  to { opacity: 1; transform: translateZ(0) translateY(0) scale(1); }
 }
 
 /* Glassmorphism for cards */
@@ -67,6 +67,8 @@ body.dark {
   box-shadow: 0 2px 16px rgba(120,160,255,0.10);
   backdrop-filter: blur(8px) saturate(1.1);
   border: 1px solid rgba(255,255,255,0.25);
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .profile {
@@ -111,11 +113,12 @@ body.dark {
   overflow: hidden;
   opacity: 0;
   transform: translateY(30px) scale(0.98);
-  animation: cardIn 0.7s cubic-bezier(.4,2,.6,1) forwards;
+  animation: cardIn 0.5s cubic-bezier(.4,2,.6,1) forwards;
+  transform: translateZ(0);
 }
 .category-card:hover, .category-card.selected {
   background: rgba(219,234,254,0.7);
-  transform: scale(1.07) rotate(-2deg);
+  transform: translateZ(0) scale(1.05) rotate(-1deg);
   box-shadow: 0 6px 24px rgba(80,120,200,0.18);
 }
 .category-card .icon {
@@ -142,25 +145,8 @@ button, .option-btn {
   overflow: hidden;
   box-shadow: 0 0 0 0 #2563eb00;
   transition: box-shadow 0.25s cubic-bezier(.4,2,.6,1), background 0.2s;
-}
-button:after, .option-btn:after {
-  content: '';
-  display: block;
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  width: 0; height: 0;
-  left: 50%; top: 50%;
-  background: rgba(80,120,255,0.18);
-  transform: translate(-50%, -50%);
-  transition: width 0.4s cubic-bezier(.4,2,.6,1), height 0.4s cubic-bezier(.4,2,.6,1), opacity 0.4s;
-  opacity: 0.7;
-}
-button:active:after, .option-btn:active:after {
-  width: 180px;
-  height: 180px;
-  opacity: 0;
-  transition: 0s;
+  will-change: transform;
+  transform: translateZ(0);
 }
 button:hover, .option-btn:hover, .next-btn:focus {
   box-shadow: 0 0 0 3px #b2cfff, 0 2px 12px #b2cfff44, 0 0 8px 2px #2563eb33;
@@ -201,7 +187,7 @@ button:hover, .option-btn:hover, .next-btn:focus {
   margin-bottom: 18px;
   opacity: 0;
   transform: translateY(30px) scale(0.98);
-  animation: cardIn 0.7s cubic-bezier(.4,2,.6,1) forwards;
+  animation: cardIn 0.5s cubic-bezier(.4,2,.6,1) forwards;
 }
 #question-text {
   margin-bottom: 18px;
@@ -226,6 +212,8 @@ button:hover, .option-btn:hover, .next-btn:focus {
   position: relative;
   display: flex;
   align-items: center;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .option-btn.correct {
   background: #d1fae5;
@@ -650,7 +638,7 @@ button:hover, .option-btn:hover, .next-btn:focus {
 @keyframes cardIn {
   to {
     opacity: 1;
-    transform: none;
+    transform: translateZ(0);
   }
 }
 
@@ -662,18 +650,22 @@ button:hover, .option-btn:hover, .next-btn:focus {
   pointer-events: none;
   z-index: 3000;
   width: 0; height: 0;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .confetti-piece {
   position: absolute;
   width: 8px; height: 16px;
   border-radius: 2px;
   opacity: 0.85;
-  animation: confetti-fall 1s cubic-bezier(.4,2,.6,1) forwards;
+  animation: confetti-fall 0.8s cubic-bezier(.4,2,.6,1) forwards;
+  will-change: transform;
+  transform: translateZ(0);
 }
 @keyframes confetti-fall {
-  0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+  0% { opacity: 1; transform: translateZ(0) translateY(0) scale(1) rotate(0deg); }
   80% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(120px) scale(0.7) rotate(360deg); }
+  100% { opacity: 0; transform: translateZ(0) translateY(100px) scale(0.8) rotate(270deg); }
 }
 
 /* --- Custom Scrollbar --- */
@@ -819,44 +811,48 @@ body.dark .app-footer {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(48px) brightness(1.1);
+  filter: blur(24px) brightness(1.05);
   opacity: 0.55;
   mix-blend-mode: lighten;
-  animation: blobMove 18s ease-in-out infinite alternate;
+  animation: blobMove 24s ease-in-out infinite alternate;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .blob1 {
-  width: 420px; height: 420px;
+  width: 320px; height: 320px;
   left: -120px; top: -100px;
   background: radial-gradient(circle at 30% 30%, #b2cfff 0%, #e0eafc 100%);
   animation-delay: 0s;
 }
 .blob2 {
-  width: 340px; height: 340px;
+  width: 280px; height: 280px;
   right: -100px; top: 60px;
   background: radial-gradient(circle at 70% 30%, #fbc2eb 0%, #a6c1ee 100%);
   animation-delay: 3s;
 }
 .blob3 {
-  width: 320px; height: 320px;
+  width: 260px; height: 260px;
   left: 40vw; bottom: -120px;
   background: radial-gradient(circle at 60% 60%, #fcb69f 0%, #ffecd2 100%);
   animation-delay: 6s;
 }
 .blob4 {
-  width: 260px; height: 260px;
+  width: 220px; height: 220px;
   right: 10vw; bottom: -80px;
   background: radial-gradient(circle at 40% 60%, #a1c4fd 0%, #c2e9fb 100%);
   animation-delay: 9s;
 }
 @keyframes blobMove {
-  0%   { transform: scale(1) translateY(0) translateX(0); }
-  40%  { transform: scale(1.12) translateY(-30px) translateX(40px); }
-  60%  { transform: scale(0.95) translateY(30px) translateX(-30px); }
-  100% { transform: scale(1.08) translateY(-20px) translateX(20px); }
+  0%   { transform: translateZ(0) scale(1) translateY(0) translateX(0); }
+  40%  { transform: translateZ(0) scale(1.08) translateY(-20px) translateX(30px); }
+  60%  { transform: translateZ(0) scale(0.98) translateY(20px) translateX(-20px); }
+  100% { transform: translateZ(0) scale(1.05) translateY(-15px) translateX(15px); }
 }
 body.dark .blob1 {
   background: radial-gradient(circle at 30% 30%, #232946 0%, #121629 100%);
@@ -877,24 +873,24 @@ body.dark .blob4 {
   top: 0; left: 0; width: 100vw; height: 100vh;
   z-index: 0;
   pointer-events: none;
-  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-  filter: blur(16px) brightness(1.08) saturate(1.1);
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 50%, #b2cfff 100%);
   opacity: 0.45;
+  will-change: transform;
+  transform: translateZ(0);
 }
 body.dark .glass-bg {
-  background: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-  filter: blur(18px) brightness(0.7) saturate(1.2);
+  background: linear-gradient(135deg, #232946 0%, #1a1f3a 50%, #0f1419 100%);
   opacity: 0.32;
 }
 
 .option-btn.clicked {
-  animation: optionBurst 0.35s cubic-bezier(.4,2,.6,1);
+  animation: optionBurst 0.25s cubic-bezier(.4,2,.6,1);
   z-index: 2;
 }
 @keyframes optionBurst {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 #2563eb00; }
-  60% { transform: scale(1.12); box-shadow: 0 0 16px 4px #b2cfff44; }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 #2563eb00; }
+  0% { transform: translateZ(0) scale(1); box-shadow: 0 0 0 0 #2563eb00; }
+  60% { transform: translateZ(0) scale(1.08); box-shadow: 0 0 12px 3px #b2cfff44; }
+  100% { transform: translateZ(0) scale(1); box-shadow: 0 0 0 0 #2563eb00; }
 }
 
 /* --- Banner Ad Styles --- */
