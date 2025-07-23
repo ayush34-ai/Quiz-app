@@ -250,24 +250,68 @@
   <!-- Add Question Management Modal -->
   <div id="question-modal" class="modal" aria-modal="true" role="dialog" style="display:none;">
     <div class="modal-content">
-      <h2>Manage Questions</h2>
-      <div class="question-controls">
-        <select id="question-category">
-          <option value="science">Science</option>
-          <option value="history">History</option>
-          <option value="math">Math</option>
-          <option value="general">General</option>
-          <option value="sanskrit">Sanskrit</option>
-          <option value="hindi">Hindi</option>
-        </select>
-        <select id="question-sub">
-          <option value="class9">Class 9th</option>
-          <option value="class10">Class 10th</option>
-        </select>
-        <button id="add-question-btn">Add New Question</button>
+      <button id="question-modal-close" class="modal-close" aria-label="Close">&times;</button>
+      <div class="question-management-header">
+        <h2><i class="fas fa-cogs"></i> Question Management</h2>
+        <p>Manage questions across all categories and classes</p>
       </div>
-      <div id="questions-list" class="questions-list">
-        <!-- Questions will be listed here -->
+      
+      <div class="question-filters">
+        <div class="filter-group">
+          <label for="question-category"><i class="fas fa-layer-group"></i> Category</label>
+          <select id="question-category">
+            <option value="">All Categories</option>
+            <option value="science">🔬 Science</option>
+            <option value="history">📜 History</option>
+            <option value="math">➗ Math</option>
+            <option value="general">🌍 General</option>
+            <option value="sanskrit">🕉️ Sanskrit</option>
+            <option value="hindi">📝 Hindi</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="question-sub"><i class="fas fa-graduation-cap"></i> Class</label>
+          <select id="question-sub">
+            <option value="">All Classes</option>
+            <option value="class9">Class 9th</option>
+            <option value="class10">Class 10th</option>
+          </select>
+        </div>
+        <div class="filter-actions">
+          <button id="add-question-btn" class="btn-primary">
+            <i class="fas fa-plus"></i> Add New Question
+          </button>
+          <button id="refresh-questions" class="btn-secondary">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
+        </div>
+      </div>
+      
+      <div class="question-stats">
+        <div class="stat-card">
+          <div class="stat-number" id="total-questions">0</div>
+          <div class="stat-label">Total Questions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="filtered-questions">0</div>
+          <div class="stat-label">Filtered Results</div>
+        </div>
+      </div>
+      
+      <div class="questions-container">
+        <div class="questions-header">
+          <h3>Questions List</h3>
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="question-search" placeholder="Search questions...">
+          </div>
+        </div>
+        <div id="questions-list" class="questions-list">
+          <div class="no-questions">
+            <i class="fas fa-question-circle"></i>
+            <p>No questions found. Add some questions to get started!</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -275,42 +319,82 @@
   <!-- Question Form Modal -->
   <div id="question-form-modal" class="modal">
     <div class="modal-content">
+      <button id="question-form-close" class="modal-close" aria-label="Close">&times;</button>
       <h2 id="question-form-title">Add New Question</h2>
       <form id="question-form">
-        <div class="form-group">
-          <label for="question-text">Question Text:</label>
-          <textarea id="question-text" required></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label>Options:</label>
-          <div class="options-container">
-            <input type="text" class="option-input" placeholder="Option 1" required>
-            <input type="text" class="option-input" placeholder="Option 2" required>
-            <input type="text" class="option-input" placeholder="Option 3" required>
-            <input type="text" class="option-input" placeholder="Option 4" required>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="form-question-category"><i class="fas fa-layer-group"></i> Category</label>
+            <select id="form-question-category" required>
+              <option value="">Select Category</option>
+              <option value="science">🔬 Science</option>
+              <option value="history">📜 History</option>
+              <option value="math">➗ Math</option>
+              <option value="general">🌍 General</option>
+              <option value="sanskrit">🕉️ Sanskrit</option>
+              <option value="hindi">📝 Hindi</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="form-question-sub"><i class="fas fa-graduation-cap"></i> Class</label>
+            <select id="form-question-sub" required>
+              <option value="">Select Class</option>
+              <option value="class9">Class 9th</option>
+              <option value="class10">Class 10th</option>
+            </select>
           </div>
         </div>
         
         <div class="form-group">
-          <label for="correct-answer">Correct Answer:</label>
+          <label for="question-text"><i class="fas fa-question"></i> Question Text</label>
+          <textarea id="question-text" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label><i class="fas fa-list"></i> Answer Options</label>
+          <div class="options-container">
+            <div class="option-row">
+              <span class="option-label">A</span>
+              <input type="text" class="option-input" placeholder="Enter option A" required>
+            </div>
+            <div class="option-row">
+              <span class="option-label">B</span>
+              <input type="text" class="option-input" placeholder="Enter option B" required>
+            </div>
+            <div class="option-row">
+              <span class="option-label">C</span>
+              <input type="text" class="option-input" placeholder="Enter option C" required>
+            </div>
+            <div class="option-row">
+              <span class="option-label">D</span>
+              <input type="text" class="option-input" placeholder="Enter option D" required>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="correct-answer"><i class="fas fa-check-circle"></i> Correct Answer</label>
           <select id="correct-answer" required>
             <option value="">Select correct answer</option>
-            <option value="0">Option 1</option>
-            <option value="1">Option 2</option>
-            <option value="2">Option 3</option>
-            <option value="3">Option 4</option>
+            <option value="0">Option A</option>
+            <option value="1">Option B</option>
+            <option value="2">Option C</option>
+            <option value="3">Option D</option>
           </select>
         </div>
         
         <div class="form-group">
-          <label for="question-explanation">Explanation (optional):</label>
-          <textarea id="question-explanation"></textarea>
+          <label for="question-explanation"><i class="fas fa-info-circle"></i> Explanation (Optional)</label>
+          <textarea id="question-explanation" placeholder="Provide an explanation for the correct answer..."></textarea>
         </div>
         
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Save</button>
-          <button type="button" class="btn btn-secondary" onclick="closeQuestionForm()">Cancel</button>
+          <button type="submit" class="btn-primary">
+            <i class="fas fa-save"></i> Save Question
+          </button>
+          <button type="button" class="btn-secondary" onclick="closeQuestionForm()">
+            <i class="fas fa-times"></i> Cancel
+          </button>
         </div>
       </form>
     </div>
