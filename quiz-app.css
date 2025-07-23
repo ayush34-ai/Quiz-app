@@ -1084,10 +1084,16 @@ body.dark .banner-ad {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.2s ease-out;
 }
-.menu-toggle:focus {
-  outline: 2px solid #2563eb;
+.menu-toggle:hover {
+  background: #2563eb;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px #2563eb44;
+}
+.menu-toggle:active {
+  transform: scale(0.95);
 }
 
 .sidebar-menu {
@@ -1098,25 +1104,17 @@ body.dark .banner-ad {
   background: #fff;
   box-shadow: 2px 0 24px 8px #2563eb22;
   z-index: 4200;
-  transform: translateX(-100%) scale(0.98);
-  opacity: 0.7;
-  box-shadow: 2px 0 24px 8px #2563eb22;
-  transition: transform 0.45s cubic-bezier(.68,-0.55,.27,1.55), opacity 0.35s cubic-bezier(.4,2,.6,1), box-shadow 0.35s;
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out, box-shadow 0.3s ease-out;
   display: flex;
   flex-direction: column;
   padding: 0;
 }
 .sidebar-menu.open {
-  transform: translateX(0) scale(1);
+  transform: translateX(0);
   opacity: 1;
-  animation: sidebarBounceIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
-  box-shadow: 2px 0 32px 10px #2563eb44;
-}
-@keyframes sidebarBounceIn {
-  0% { transform: translateX(-100%) scale(0.98); opacity: 0.7; }
-  60% { transform: translateX(10px) scale(1.03); opacity: 1; }
-  80% { transform: translateX(-2px) scale(0.99); }
-  100% { transform: translateX(0) scale(1); opacity: 1; }
+  box-shadow: 2px 0 32px 10px #2563eb33;
 }
 .sidebar-header {
   display: flex;
@@ -1165,10 +1163,28 @@ body.dark .banner-ad {
   font-size: 1.05em;
   color: #2563eb;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease-out;
+  position: relative;
+  overflow: hidden;
 }
 .sidebar-list button:hover {
-  background: #e0eafc;
+  background: linear-gradient(90deg, #e0eafc 0%, #f0f4ff 100%);
+  transform: translateX(8px);
+  color: #1d4ed8;
+}
+.sidebar-list button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: #2563eb;
+  transform: scaleY(0);
+  transition: transform 0.2s ease-out;
+}
+.sidebar-list button:hover::before {
+  transform: scaleY(1);
 }
 .sidebar-logout {
   margin: 24px 24px 32px 24px;
@@ -1189,10 +1205,10 @@ body.dark .banner-ad {
 .sidebar-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(30,40,60,0.18);
-  backdrop-filter: blur(2.5px) saturate(1.2);
+  background: rgba(30,40,60,0.4);
+  backdrop-filter: blur(4px);
   opacity: 0;
-  transition: opacity 0.4s cubic-bezier(.4,2,.6,1), backdrop-filter 0.4s;
+  transition: opacity 0.3s ease-out, backdrop-filter 0.3s ease-out;
   display: block;
   pointer-events: none;
   z-index: 4195;
@@ -1200,11 +1216,6 @@ body.dark .banner-ad {
 .sidebar-overlay.open {
   opacity: 1;
   pointer-events: auto;
-  animation: overlayFadeIn 0.4s cubic-bezier(.4,2,.6,1);
-}
-@keyframes overlayFadeIn {
-  from { opacity: 0; backdrop-filter: blur(0px) saturate(1); }
-  to { opacity: 1; backdrop-filter: blur(2.5px) saturate(1.2); }
 }
 @media (max-width: 600px) {
   .sidebar-menu {
