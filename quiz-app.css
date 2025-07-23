@@ -911,29 +911,6 @@ body.dark .glass-bg {
   100% { transform: translateZ(0) scale(1); box-shadow: 0 0 0 0 #2563eb00; }
 }
 
-/* --- Banner Ad Styles --- */
-.banner-ad {
-  width: 100%;
-  background: linear-gradient(90deg, #b2cfff 0%, #2563eb 100%);
-  color: #fff;
-  text-align: center;
-  padding: 14px 0 12px 0;
-  font-size: 1.1em;
-  font-weight: 700;
-  letter-spacing: 1px;
-  box-shadow: 0 2px 12px #b2cfff44;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-  z-index: 100;
-  position: relative;
-  opacity: 0.97;
-}
-body.dark .banner-ad {
-  background: linear-gradient(90deg, #232946 0%, #2563eb 100%);
-  color: #e0eafc;
-  box-shadow: 0 2px 12px #23294644;
-}
-
 /* Sub-category animation (improved) */
 .sub-categories {
   display: flex;
