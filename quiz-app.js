@@ -188,7 +188,7 @@ let state = {
   correct: 0,
   wrong: 0,
   totalTime: 0,
-  questionsPerQuiz: 'all', // Show all available questions
+  timer: 15,
   timerInterval: null,
   lifelines: {
     fifty: true,
