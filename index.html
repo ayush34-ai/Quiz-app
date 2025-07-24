@@ -162,6 +162,10 @@
     <!-- Result Screen -->
     <section id="result-screen" class="screen">
       <h1>Quiz Results</h1>
+      <div class="result-grade">
+        <h3 id="result-grade-title">Excellent!</h3>
+        <p id="result-grade-message">You did great!</p>
+      </div>
       <div class="result-summary">
         <div class="progress-circle">
           <svg width="120" height="120">
@@ -171,14 +175,29 @@
           <span id="result-score">0/10</span>
         </div>
         <div class="result-details">
-          <p>Correct: <span id="correct-count">0</span></p>
-          <p>Wrong: <span id="wrong-count">0</span></p>
-          <p>Total Time: <span id="total-time">0</span>s</p>
+          <p class="correct-stat">✓ Correct: <span id="correct-count">0</span></p>
+          <p class="wrong-stat">✗ Wrong: <span id="wrong-count">0</span></p>
+          <p class="time-stat">⏱ Time: <span id="total-time">0</span>s</p>
+        </div>
+      </div>
+      <div class="result-breakdown">
+        <div class="breakdown-item">
+          <div class="breakdown-number" id="accuracy-percent">0%</div>
+          <div class="breakdown-label">Accuracy</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-number" id="avg-time">0s</div>
+          <div class="breakdown-label">Avg Time</div>
+        </div>
+        <div class="breakdown-item">
+          <div class="breakdown-number" id="quiz-rank">-</div>
+          <div class="breakdown-label">Rank</div>
         </div>
       </div>
       <div class="result-actions">
         <button id="retry-btn">Retry Quiz</button>
         <button id="home-btn">Return Home</button>
+        <button id="share-result">Share Result</button>
       </div>
     </section>
   </div>

@@ -252,6 +252,12 @@ button:hover, .option-btn:hover, .next-btn:focus {
   gap: 24px;
   justify-content: center;
   margin: 24px 0;
+  background: rgba(255,255,255,0.45);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 2px 16px rgba(120,160,255,0.10);
+  backdrop-filter: blur(8px) saturate(1.1);
+  border: 1px solid rgba(255,255,255,0.25);
 }
 .progress-circle {
   position: relative;
@@ -282,7 +288,86 @@ button:hover, .option-btn:hover, .next-btn:focus {
 }
 .result-details {
   font-size: 1.1em;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
+
+.result-details p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.result-details .correct-stat {
+  color: #059669;
+  border-left: 4px solid #10b981;
+}
+
+.result-details .wrong-stat {
+  color: #dc2626;
+  border-left: 4px solid #ef4444;
+}
+
+.result-details .time-stat {
+  color: #2563eb;
+  border-left: 4px solid #3b82f6;
+}
+
+.result-grade {
+  text-align: center;
+  margin: 20px 0;
+  padding: 16px;
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+}
+
+.result-grade h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.4em;
+}
+
+.result-grade p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 1.1em;
+}
+
+.result-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.breakdown-item {
+  background: rgba(255,255,255,0.6);
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.breakdown-number {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #2563eb;
+  margin-bottom: 4px;
+}
+
+.breakdown-label {
+  font-size: 0.9em;
+  color: #64748b;
+  font-weight: 500;
+}
+
 .result-actions {
   display: flex;
   gap: 16px;
@@ -2276,4 +2361,4 @@ body.dark #cancel-question {
 
 body.dark #cancel-question:hover {
   background: #475569;
-} 
+}
