@@ -251,76 +251,18 @@
   <div id="question-modal" class="modal" aria-modal="true" role="dialog" style="display:none;">
     <div class="modal-content">
       <button id="question-modal-close" class="modal-close" aria-label="Close">&times;</button>
-      <div class="question-management-header">
-        <h2><i class="fas fa-cogs"></i> Question Management</h2>
-        <p>Manage questions across all categories and classes</p>
-      </div>
-      
-      <div class="question-filters">
-        <div class="filter-section">
-          <div class="filter-group">
-            <label for="question-category"><i class="fas fa-layer-group"></i> Category</label>
-            <select id="question-category">
-              <option value="">All Categories</option>
-              <option value="science">🔬 Science</option>
-              <option value="history">📜 History</option>
-              <option value="math">➗ Math</option>
-              <option value="general">🌍 General</option>
-              <option value="sanskrit">🕉️ Sanskrit</option>
-              <option value="hindi">📝 Hindi</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label for="question-sub"><i class="fas fa-graduation-cap"></i> Class</label>
-            <select id="question-sub">
-              <option value="">All Classes</option>
-              <option value="class9">Class 9th</option>
-              <option value="class10">Class 10th</option>
-            </select>
-          </div>
+      <div class="question-management-container">
+        <div class="question-management-header">
+          <h2><i class="fas fa-cogs"></i> Question Management</h2>
+          <p>Manage questions across all categories and classes</p>
         </div>
-        <div class="filter-actions">
-          <button id="add-question-btn" class="btn-primary">
-            <i class="fas fa-plus"></i> Add New Question
-          </button>
-          <button id="quick-add-btn" class="btn-secondary">
-            <i class="fas fa-bolt"></i> Quick Add
-          </button>
-          <button id="refresh-questions" class="btn-secondary">
-            <i class="fas fa-sync-alt"></i> Refresh
-          </button>
-          <button id="export-questions" class="btn-export">
-            <i class="fas fa-download"></i> Export
-          </button>
-          <button id="import-questions" class="btn-import">
-            <i class="fas fa-upload"></i> Import
-          </button>
-        </div>
-      </div>
-      
-      <div class="question-stats">
-        <div class="stat-card">
-          <div class="stat-number" id="total-questions">0</div>
-          <div class="stat-label">Total Questions</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number" id="filtered-questions">0</div>
-          <div class="stat-label">Filtered Results</div>
-        </div>
-      </div>
-      
-      <!-- Quick Add Form -->
-      <div id="quick-add-form" class="quick-add-form">
-        <div class="quick-add-header">
-          <h3><i class="fas fa-bolt"></i> Quick Add Question</h3>
-          <button class="close-quick-add" id="close-quick-add">&times;</button>
-        </div>
-        <form id="quick-question-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="quick-category"><i class="fas fa-layer-group"></i> Category</label>
-              <select id="quick-category" required>
-                <option value="">Select Category</option>
+        
+        <div class="question-filters">
+          <div class="filter-section">
+            <div class="filter-group">
+              <label for="question-category"><i class="fas fa-layer-group"></i> Category</label>
+              <select id="question-category">
+                <option value="">All Categories</option>
                 <option value="science">🔬 Science</option>
                 <option value="history">📜 History</option>
                 <option value="math">➗ Math</option>
@@ -329,94 +271,154 @@
                 <option value="hindi">📝 Hindi</option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="quick-sub"><i class="fas fa-graduation-cap"></i> Class</label>
-              <select id="quick-sub" required>
-                <option value="">Select Class</option>
+            <div class="filter-group">
+              <label for="question-sub"><i class="fas fa-graduation-cap"></i> Class</label>
+              <select id="question-sub">
+                <option value="">All Classes</option>
                 <option value="class9">Class 9th</option>
                 <option value="class10">Class 10th</option>
               </select>
             </div>
           </div>
-          
-          <div class="form-group">
-            <label for="quick-question-text"><i class="fas fa-question"></i> Question</label>
-            <textarea id="quick-question-text" required placeholder="Enter your question here..."></textarea>
+          <div class="filter-actions">
+            <button id="add-question-btn" class="btn-primary">
+              <i class="fas fa-plus"></i> Add New Question
+            </button>
+            <button id="quick-add-btn" class="btn-secondary">
+              <i class="fas fa-bolt"></i> Quick Add
+            </button>
+            <button id="refresh-questions" class="btn-secondary">
+              <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <button id="export-questions" class="btn-export">
+              <i class="fas fa-download"></i> Export
+            </button>
+            <button id="import-questions" class="btn-import">
+              <i class="fas fa-upload"></i> Import
+            </button>
           </div>
-          
-          <div class="form-group">
-            <label><i class="fas fa-list"></i> Options & Correct Answer</label>
-            <div class="options-container">
-              <div class="option-row">
-                <span class="option-label">A</span>
-                <input type="text" class="quick-option-input" placeholder="Option A" required>
-                <input type="radio" name="quick-correct" value="0" required>
+        </div>
+        
+        <div class="question-stats">
+          <div class="stat-card">
+            <div class="stat-number" id="total-questions">0</div>
+            <div class="stat-label">Total Questions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="filtered-questions">0</div>
+            <div class="stat-label">Filtered Results</div>
+          </div>
+        </div>
+        
+        <!-- Quick Add Form -->
+        <div id="quick-add-form" class="quick-add-form">
+          <div class="quick-add-header">
+            <h3><i class="fas fa-bolt"></i> Quick Add Question</h3>
+            <button class="close-quick-add" id="close-quick-add">&times;</button>
+          </div>
+          <form id="quick-question-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="quick-category"><i class="fas fa-layer-group"></i> Category</label>
+                <select id="quick-category" required>
+                  <option value="">Select Category</option>
+                  <option value="science">🔬 Science</option>
+                  <option value="history">📜 History</option>
+                  <option value="math">➗ Math</option>
+                  <option value="general">🌍 General</option>
+                  <option value="sanskrit">🕉️ Sanskrit</option>
+                  <option value="hindi">📝 Hindi</option>
+                </select>
               </div>
-              <div class="option-row">
-                <span class="option-label">B</span>
-                <input type="text" class="quick-option-input" placeholder="Option B" required>
-                <input type="radio" name="quick-correct" value="1" required>
-              </div>
-              <div class="option-row">
-                <span class="option-label">C</span>
-                <input type="text" class="quick-option-input" placeholder="Option C" required>
-                <input type="radio" name="quick-correct" value="2" required>
-              </div>
-              <div class="option-row">
-                <span class="option-label">D</span>
-                <input type="text" class="quick-option-input" placeholder="Option D" required>
-                <input type="radio" name="quick-correct" value="3" required>
+              <div class="form-group">
+                <label for="quick-sub"><i class="fas fa-graduation-cap"></i> Class</label>
+                <select id="quick-sub" required>
+                  <option value="">Select Class</option>
+                  <option value="class9">Class 9th</option>
+                  <option value="class10">Class 10th</option>
+                </select>
               </div>
             </div>
-          </div>
-          
-          <div class="form-actions">
-            <button type="submit" class="btn-primary">
-              <i class="fas fa-save"></i> Save & Add Another
+            
+            <div class="form-group">
+              <label for="quick-question-text"><i class="fas fa-question"></i> Question</label>
+              <textarea id="quick-question-text" required placeholder="Enter your question here..."></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label><i class="fas fa-list"></i> Options & Correct Answer</label>
+              <div class="options-container">
+                <div class="option-row">
+                  <span class="option-label">A</span>
+                  <input type="text" class="quick-option-input" placeholder="Option A" required>
+                  <input type="radio" name="quick-correct" value="0" required>
+                </div>
+                <div class="option-row">
+                  <span class="option-label">B</span>
+                  <input type="text" class="quick-option-input" placeholder="Option B" required>
+                  <input type="radio" name="quick-correct" value="1" required>
+                </div>
+                <div class="option-row">
+                  <span class="option-label">C</span>
+                  <input type="text" class="quick-option-input" placeholder="Option C" required>
+                  <input type="radio" name="quick-correct" value="2" required>
+                </div>
+                <div class="option-row">
+                  <span class="option-label">D</span>
+                  <input type="text" class="quick-option-input" placeholder="Option D" required>
+                  <input type="radio" name="quick-correct" value="3" required>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">
+                <i class="fas fa-save"></i> Save & Add Another
+              </button>
+              <button type="button" class="btn-secondary" id="save-and-close">
+                <i class="fas fa-check"></i> Save & Close
+              </button>
+            </div>
+          </form>
+        </div>
+        
+        <!-- Questions Toolbar -->
+        <div class="questions-toolbar">
+          <div class="bulk-actions">
+            <div class="bulk-select">
+              <input type="checkbox" id="select-all-questions">
+              <label for="select-all-questions">Select All</label>
+            </div>
+            <button id="bulk-delete" class="btn-secondary" style="display:none;">
+              <i class="fas fa-trash"></i> Delete Selected
             </button>
-            <button type="button" class="btn-secondary" id="save-and-close">
-              <i class="fas fa-check"></i> Save & Close
+            <button id="bulk-export" class="btn-secondary" style="display:none;">
+              <i class="fas fa-download"></i> Export Selected
             </button>
           </div>
-        </form>
-      </div>
-      
-      <!-- Questions Toolbar -->
-      <div class="questions-toolbar">
-        <div class="bulk-actions">
-          <div class="bulk-select">
-            <input type="checkbox" id="select-all-questions">
-            <label for="select-all-questions">Select All</label>
-          </div>
-          <button id="bulk-delete" class="btn-secondary" style="display:none;">
-            <i class="fas fa-trash"></i> Delete Selected
-          </button>
-          <button id="bulk-export" class="btn-secondary" style="display:none;">
-            <i class="fas fa-download"></i> Export Selected
-          </button>
-        </div>
-        <div class="view-toggle">
-          <button class="view-btn active" data-view="detailed">
-            <i class="fas fa-list"></i> Detailed
-          </button>
-          <button class="view-btn" data-view="compact">
-            <i class="fas fa-th-list"></i> Compact
-          </button>
-        </div>
-      </div>
-      
-      <div class="questions-container">
-        <div class="questions-header">
-          <h3><i class="fas fa-list-ul"></i> Questions List</h3>
-          <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" id="question-search" placeholder="Search questions...">
+          <div class="view-toggle">
+            <button class="view-btn active" data-view="detailed">
+              <i class="fas fa-list"></i> Detailed
+            </button>
+            <button class="view-btn" data-view="compact">
+              <i class="fas fa-th-list"></i> Compact
+            </button>
           </div>
         </div>
-        <div id="questions-list" class="questions-list">
-          <div class="no-questions">
-            <i class="fas fa-question-circle"></i>
-            <p>No questions found. Add some questions to get started!</p>
+        
+        <div class="questions-container">
+          <div class="questions-header">
+            <h3><i class="fas fa-list-ul"></i> Questions List</h3>
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="question-search" placeholder="Search questions...">
+            </div>
+          </div>
+          <div id="questions-list" class="questions-list">
+            <div class="no-questions">
+              <i class="fas fa-question-circle"></i>
+              <p>No questions found. Add some questions to get started!</p>
+            </div>
           </div>
         </div>
       </div>

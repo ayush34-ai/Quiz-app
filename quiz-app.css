@@ -1545,15 +1545,17 @@ body.dark .glass-bg {
   margin-bottom: 1.5em;
   flex-wrap: wrap;
   gap: 1em;
+  flex-shrink: 0;
 }
 
 .questions-header h3 {
   color: #1e293b;
   margin: 0;
   font-size: 1.3em;
-  display: flex;
+  flex: 1;
   align-items: center;
   gap: 0.5em;
+  min-height: 0;
 }
 
 .search-box {
@@ -1564,6 +1566,7 @@ body.dark .glass-bg {
 
 .search-box i {
   position: absolute;
+  flex-shrink: 0;
   left: 1em;
   color: #64748b;
   z-index: 1;
@@ -1922,10 +1925,19 @@ body.dark .glass-bg {
 }
 /* Question Form Modal Styles */
 #question-form-modal .modal-content {
-  max-width: 700px;
+  max-width: 90vw;
   width: 95%;
-  max-height: 90vh;
+  max-height: 95vh;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-management-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 80vh;
 }
 
 #question-form {
@@ -2067,6 +2079,7 @@ body.dark .glass-bg {
   margin-bottom: 2em;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   border: 1px solid #e2e8f0;
+  flex-shrink: 0;
   display: none;
 }
 
@@ -2084,6 +2097,7 @@ body.dark .glass-bg {
     opacity: 1;
     transform: translateY(0);
   }
+  flex-shrink: 0;
 }
 
 .quick-add-header {
@@ -2096,6 +2110,11 @@ body.dark .glass-bg {
 }
 
 .quick-add-header h3 {
+  flex-shrink: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   color: #1e293b;
   margin: 0;
   font-size: 1.2em;

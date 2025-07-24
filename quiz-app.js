@@ -1639,13 +1639,15 @@ async function updateQuestion(questionId, questionData) {
     });
     
     await loadQuestions();
-  } catch (error) {
+    document.getElementById('total-questions').textContent = allQuestions.length || 0;
     console.error('Error updating question:', error);
     alert('Error updating question: ' + error.message);
   }
 }
 
 // Delete question
+    document.getElementById('total-questions').textContent = '0';
+    document.getElementById('filtered-questions').textContent = '0';
 async function deleteQuestion(questionId) {
   try {
     const userRole = localStorage.getItem('quizUserRole');
@@ -1693,7 +1695,7 @@ window.addEventListener('click', (e) => {
 // Show question form modal
 function showQuestionForm(question = null) {
   currentQuestionId = question ? question.id : null;
-  const formTitle = document.getElementById('question-form-title');
+  document.getElementById('filtered-questions').textContent = filteredQuestions.length || 0;
   formTitle.textContent = question ? 'Edit Question' : 'Add Question';
   
   if (question) {
