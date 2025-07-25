@@ -675,7 +675,7 @@ button:hover, .option-btn:hover, .next-btn:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.7s cubic-bezier(.4,2,.6,1), visibility 0.7s;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
   opacity: 1;
   visibility: visible;
 }
