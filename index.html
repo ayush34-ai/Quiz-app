@@ -32,17 +32,6 @@
   <!-- Menu Button -->
   <button id="menu-toggle" class="menu-toggle hide-during-splash" aria-label="Open menu">☰</button>
 
-  <!-- Hidden audio element -->
-  <audio id="click-sound" src="click.mp3.wav" preload="auto"></audio>
-
-  <script>
-    const button = document.getElementById('click-me');
-    const clickSound = document.getElementById('click-sound');
-
-    button.addEventListener('click', () => {
-      clickSound.currentTime = 0; // Rewind to start
-      clickSound.play();
-    });
 
   <!-- Sidebar Menu -->
   <aside id="sidebar-menu" class="sidebar-menu hide-during-splash">
