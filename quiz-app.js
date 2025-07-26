@@ -1042,11 +1042,11 @@ document.body.appendChild(muteBtn);
   btn.addEventListener('click', () => playSound('click'));
 });
 
-// Create and configure the audio element
-const clickSound = document.createElement('audio');
-clickSound.src = 'sounds/click.mp3.wav'; // Replace with your actual sound path
-clickSound.preload = 'auto';
-document.body.appendChild(clickSound); // Optional: add to DOM if needed
+// Play click sound on all elements with class 'click'
+document.querySelectorAll('.click').forEach(el => {
+  el.addEventListener('click', () => playSound('click'));
+});
+
 
 // Play sound on any click
 document.addEventListener('click', () => {
