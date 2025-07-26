@@ -1707,8 +1707,12 @@ function showQuestionForm(question = null) {
     questionForm.reset();
   }
   
-  questionFormModal.style.display = 'block';
-}
+  // Shuffle and take all available questions
+  if (questionsPerQuiz === 'all') {
+    currentQuestions = shuffleArray([...categoryQuestions]);
+  } else {
+    currentQuestions = shuffleArray([...categoryQuestions]).slice(0, questionsPerQuiz);
+  }
 
 // Function to close question form modal
 function closeQuestionForm() {
@@ -1716,7 +1720,7 @@ function closeQuestionForm() {
   modal.style.display = 'none';
   document.getElementById('question-form').reset();
   currentQuestionId = null;
-}
+  document.getElementById('question-counter').textContent = `Question 1 of ${currentQuestions.length}`;
 
 // Add event listener for question form submission
 document.getElementById('question-form').addEventListener('submit', async (e) => {
