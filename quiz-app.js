@@ -993,10 +993,10 @@ if (localStorage.getItem('quizDarkMode') === '1' ||
 
 // --- Sound Effects ---
 const sounds = {
-  click: new Audio('D:/quizapp/sounds/click.mp3.wav'), // Button click
-  correct: new Audio('D:/quizapp/sounds/correct.mp3'), // Success chime
-  wrong: new Audio('D:/quizapp/sounds/wrong.mp3'), // Error/fail
-  timer: new Audio('D:/quizapp/sounds/timer.mp3') // Time's up/alert
+  click: new Audio('sounds/click.mp3.wav'), // Button click
+  correct: new Audio('sounds/correct.mp3'), // Success chime
+  wrong: new Audio('sounds/wrong.mp3'), // Error/fail
+  timer: new Audio('sounds/timer.mp3') // Time's up/alert
 };
 let soundMuted = localStorage.getItem('quizSoundMuted') === '1';
 function playSound(type) {
