@@ -612,19 +612,20 @@ function showResult() {
     db.collection('users').doc(user).collection('attempts').add({
       date: firebase.firestore.FieldValue.serverTimestamp(),
       score: state.score,
-      correct: state.correct,
-      wrong: state.wrong,
+  const totalQuestions = currentQuestions.length;
+  const wrongAnswers = totalQuestions - score;
+  const accuracy = Math.round((score / totalQuestions) * 100);
       total: state.questions.length,
       category: state.category,
-      sub: state.sub
+  document.getElementById('result-score').textContent = `${score}/${totalQuestions}`;
     });
   }
 }
 
 function animateProgressCircle(correct, total) {
   const percent = correct / total;
-  const circleLen = 2 * Math.PI * 54;
-  const offset = circleLen * (1 - percent);
+  const circumference = 339.292; // 2 * Math.PI * 54
+  const offset = circumference - (accuracy / 100) * circumference;
   progressCircle.style.strokeDashoffset = offset;
 }
 
@@ -1707,12 +1708,8 @@ function showQuestionForm(question = null) {
     questionForm.reset();
   }
   
-  // Shuffle and take all available questions
-  if (questionsPerQuiz === 'all') {
-    currentQuestions = shuffleArray([...categoryQuestions]);
-  } else {
-    currentQuestions = shuffleArray([...categoryQuestions]).slice(0, questionsPerQuiz);
-  }
+  questionFormModal.style.display = 'block';
+}
 
 // Function to close question form modal
 function closeQuestionForm() {
@@ -1720,7 +1717,7 @@ function closeQuestionForm() {
   modal.style.display = 'none';
   document.getElementById('question-form').reset();
   currentQuestionId = null;
-  document.getElementById('question-counter').textContent = `Question 1 of ${currentQuestions.length}`;
+}
 
 // Add event listener for question form submission
 document.getElementById('question-form').addEventListener('submit', async (e) => {
