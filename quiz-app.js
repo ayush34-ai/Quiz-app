@@ -993,7 +993,7 @@ if (localStorage.getItem('quizDarkMode') === '1' ||
 
 // --- Sound Effects ---
 const sounds = {
-  click: new Audio('sounds/click.mp3.wav'), // Button click
+  click: new Audio('sounds/click.mp3.wav'), // when User click
   correct: new Audio('sounds/correct.mp3'), // Success chime
   wrong: new Audio('sounds/wrong.mp3'), // Error/fail
   timer: new Audio('sounds/timer.mp3') // Time's up/alert
@@ -1041,6 +1041,19 @@ document.body.appendChild(muteBtn);
 [...document.querySelectorAll('button'), ...document.querySelectorAll('.option-btn')].forEach(btn => {
   btn.addEventListener('click', () => playSound('click'));
 });
+
+// Create and configure the audio element
+const clickSound = document.createElement('audio');
+clickSound.src = 'sounds/click.mp3.wav'; // Replace with your actual sound path
+clickSound.preload = 'auto';
+document.body.appendChild(clickSound); // Optional: add to DOM if needed
+
+// Play sound on any click
+document.addEventListener('click', () => {
+  clickSound.currentTime = 0; // Rewind to start
+  clickSound.play();
+});
+
 
 // Add event listener for sub-category buttons
 function setupSubCategoryListeners() {
